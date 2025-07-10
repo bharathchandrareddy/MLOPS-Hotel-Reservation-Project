@@ -1,0 +1,7 @@
+venv/
+mlruns/
+LOGS/
+hotel_reservations_project.egg-info/
+# Compiled Python files
+__pycache__/
+*.pyc
