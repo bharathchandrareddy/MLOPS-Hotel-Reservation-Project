@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width , initial=scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static' , filename='style.css') }}">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>HOTEL RESERVATION PREDICTION ❤️</title>
 </head>
-
 
 <body>
 <div class="container">
@@ -15,117 +14,75 @@
     <form method="POST">
         <div class="form-group">
             <label for="lead_time">Lead Time</label>
-            <input type="number" id="lead_time" name="lead_time" required>
-        </div>
-
-
-        <div class="form-group">
-            <label for="no_of_special_request">No_of_special_request</label>
-            <input type="number" id="no_of_special_request" name="no_of_special_request" required>
+            <input type="number" id="lead_time" name="lead_time" required value="{{ request.form.get('lead_time', '') }}">
         </div>
 
         <div class="form-group">
-            <label for="avg_price_per_room">Avg_price_per_room</label>
-            <input type="number" id="avg_price_per_room" name="avg_price_per_room" required>
+            <label for="no_of_special_request">No of special request</label>
+            <input type="number" id="no_of_special_request" name="no_of_special_request" required value="{{ request.form.get('no_of_special_request', '') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="avg_price_per_room">Avg price per room</label>
+            <input type="number" id="avg_price_per_room" name="avg_price_per_room" required value="{{ request.form.get('avg_price_per_room', '') }}">
         </div>
 
         <div class="form-group">
             <label for="arrival_month">Arrival Month</label>
             <select id="arrival_month" name="arrival_month" required>
-                <option value="1">Januray</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
+                {% for i, m in [('1','January'), ('2','February'), ('3','March'), ('4','April'), ('5','May'), ('6','June'),
+                                ('7','July'), ('8','August'), ('9','September'), ('10','October'), ('11','November'), ('12','December')] %}
+                    <option value="{{ i }}" {% if request.form.get('arrival_month') == i %}selected{% endif %}>{{ m }}</option>
+                {% endfor %}
             </select>
         </div>
-
 
         <div class="form-group">
             <label for="arrival_date">Arrival Date</label>
             <select id="arrival_date" name="arrival_date" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
+                {% for day in range(1, 32) %}
+                    <option value="{{ day }}" {% if request.form.get('arrival_date') == day|string %}selected{% endif %}>{{ day }}</option>
+                {% endfor %}
             </select>
         </div>
 
         <div class="form-group">
-            <label for="market_segment_type">Market_segment_type</label>
+            <label for="market_segment_type">Market segment type</label>
+            {% set market_types = ['Aviation', 'Complimentary', 'Corporate', 'Offline', 'Online'] %}
             <select id="market_segment_type" name="market_segment_type" required>
-                <option value="0">Aviation</option>
-                <option value="1">Complimentary</option>
-                <option value="2">Corporate</option>
-                <option value="3">Offline</option>
-                <option value="4">Online</option>
+                {% for i in range(5) %}
+                    <option value="{{ i }}" {% if request.form.get('market_segment_type') == i|string %}selected{% endif %}>{{ market_types[i] }}</option>
+                {% endfor %}
             </select>
         </div>
 
         <div class="form-group">
-            <label for="no_of_week_nights">No_of_week_nights</label>
-            <input type="number" id="no_of_week_nights" name="no_of_week_nights" required>
+            <label for="no_of_week_nights">No of week nights</label>
+            <input type="number" id="no_of_week_nights" name="no_of_week_nights" required value="{{ request.form.get('no_of_week_nights', '') }}">
         </div>
 
         <div class="form-group">
-            <label for="no_of_weekend_nights">No_of_weekend_nights</label>
-            <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" required>
+            <label for="no_of_weekend_nights">No of weekend nights</label>
+            <input type="number" id="no_of_weekend_nights" name="no_of_weekend_nights" required value="{{ request.form.get('no_of_weekend_nights', '') }}">
         </div>
 
         <div class="form-group">
-            <label for="type_of_meal_plan">Type_of_meal_plan</label>
+            <label for="type_of_meal_plan">Type of meal plan</label>
+            {% set meal_plans = ['Meal Plan 1', 'Meal Plan 2', 'Meal Plan 3', 'Not Selected'] %}
             <select id="type_of_meal_plan" name="type_of_meal_plan" required>
-                <option value="0">Meal Plan 1</option>
-                <option value="1">Meal Plan 2</option>
-                <option value="2">Meal Plan 3</option>
-                <option value="3">Not Selected</option>
+                {% for i in range(4) %}
+                    <option value="{{ i }}" {% if request.form.get('type_of_meal_plan') == i|string %}selected{% endif %}>{{ meal_plans[i] }}</option>
+                {% endfor %}
             </select>
         </div>
 
         <div class="form-group">
-            <label for="room_type_reserved">Type_of_meal_plan</label>
+            <label for="room_type_reserved">Type of Room</label>
+            {% set room_types = ['Room Type 1', 'Room Type 2', 'Room Type 3', 'Room Type 4', 'Room Type 5', 'Room Type 6', 'Room Type 7'] %}
             <select id="room_type_reserved" name="room_type_reserved" required>
-                <option value="0">Room Type 1</option>
-                <option value="1">Room Type 2</option>
-                <option value="2">Room Type 3</option>
-                <option value="3">Room Type 4</option>
-                <option value="4">Room Type 5</option>
-                <option value="5">Room Type 6</option>
-                <option value="6">Room Type 7</option>
+                {% for i in range(7) %}
+                    <option value="{{ i }}" {% if request.form.get('room_type_reserved') == i|string %}selected{% endif %}>{{ room_types[i] }}</option>
+                {% endfor %}
             </select>
         </div>
 
@@ -135,13 +92,15 @@
     {% if prediction is not none %}
     <div class="result">
         {% if prediction == 0 %}
-        <p>The Customer is going to cancel his reservation</p>
+        <p>The chance of customer cancelling their reservation is HIGH</p>
         {% elif prediction == 1 %}
-        <p>The Customer is not going to cancel his reservation</p>
+        <p>The chance of customer cancelling their reservation is LOW</p>
         {% endif %}
+        <form method="GET">
+            <button type="submit">Check Prediction for Other Customer</button>
+        </form>
     </div>
     {% endif %}
 </div>
-
 </body>
 </html>
