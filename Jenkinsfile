@@ -1,13 +1,24 @@
 pipeline{
     agent any
 
+    environment {
+            VENV_DIR = 'venv'
+    }
+
     stages{
-        stage('Cloning Github repo to jenkins'){
+        stage('Setting up our Virtual Environment and Installing dependancies'){
             steps{
                 script{
-                    echo 'Cloning Github repo to  jenkins'
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/bharathchandrareddy/MLOPS-Hotel-Reservation-Project.git']])
+                    echo 'Setting up our Virtual Environment and Installing dependancies............'
+                    sh '''
+                    python -m venv ${VENV_DIR}
+                    . ${VENV_DIR}/bin/activate
+                    pip install --upgrade pip
+                    pip install -e .
                     
+                    
+                    '''
+
                 }
             }
         }
