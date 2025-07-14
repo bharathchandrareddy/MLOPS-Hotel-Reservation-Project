@@ -15,7 +15,7 @@ class CustomException(Exception):
         :param error_detail: The error details from sys
         :return: Formatted error message
         """
-        tb = error_detail.exc_info()[2]
+        tb = traceback.sys.exc_info()[2]
         file_name = tb.tb_frame.f_code.co_filename
         line_number = tb.tb_lineno
         #formatted_traceback = ''.join(traceback.format_list(tb))
