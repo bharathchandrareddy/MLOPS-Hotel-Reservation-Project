@@ -25,6 +25,8 @@ PROCESSED_TEST_DATA = PROCESSED_DIR / 'processed_test.csv'
 
 
 
+
+
 # PROCESSED_DIR = 'artifacts\processed'
 # PROCESSED_TRAIN_DATA = os.path.join(PROCESSED_DIR,'processed_train.csv')
 # PROCESSED_TEST_DATA = os.path.join(PROCESSED_DIR,'processed_test.csv')
