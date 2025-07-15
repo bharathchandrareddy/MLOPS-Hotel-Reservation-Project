@@ -3,7 +3,10 @@ FROM python:slim
 
 # Set environment variables to prevent Python from writing .pyc files & Ensure Python output is not buffered
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    GOOGLE_APPLICATION_CREDENTIALS=/app/keys/gcp-credentials.json
+    
+    
 
 # Set the working directory
 WORKDIR /app
