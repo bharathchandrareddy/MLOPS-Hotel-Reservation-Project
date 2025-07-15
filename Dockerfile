@@ -6,6 +6,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     GOOGLE_APPLICATION_CREDENTIALS=/app/keys/gcp-credentials.json
 
+    # ARG
+
+ARG GOOGLE_APPLICATION_CREDENTIALS_PATH
+
+#ENV GOOGLE_APPLICATION_CREDENTIALS=/app/keys/gcp-credentials.json
 # Set the working directory
 WORKDIR /app
 
