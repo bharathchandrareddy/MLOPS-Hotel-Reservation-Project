@@ -31,9 +31,9 @@ class DataIngestion:
         try:
             #client = storage.Client.from_service_account_json("C:\\Users\\PC\\Desktop\\courses\\End-to-end-MLOps\\hotel-reservation-project-01-54f7d91d705c.json")
 
-            #client = storage.Client()
-            cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "/app/keys/gcp-credentials.json")
-            client = storage.Client.from_service_account_json(cred_path)
+            client = storage.Client()
+            #cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "/app/keys/gcp-credentials.json")
+            #client = storage.Client.from_service_account_json(cred_path)
             bucket = client.bucket(self.bucket_name)
             blob = bucket.blob(self.bucket_file_name)
             blob.download_to_filename(os.path.join(RAW_DIR, self.bucket_file_name))
