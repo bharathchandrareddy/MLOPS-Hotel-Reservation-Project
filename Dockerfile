@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy the application code
 COPY . .
+COPY keys/gcp-credentials.json /app/keys/gcp-credentials.json
 
 # Install the package in editable mode
 RUN pip install --no-cache-dir -e .
