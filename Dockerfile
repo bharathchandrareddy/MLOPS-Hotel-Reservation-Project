@@ -9,6 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     # ARG
 
 ARG GOOGLE_APPLICATION_CREDENTIALS_PATH
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/keys/gcp-credentials.json
 
 #ENV GOOGLE_APPLICATION_CREDENTIALS=/app/keys/gcp-credentials.json
 # Set the working directory
@@ -28,7 +29,7 @@ COPY keys/gcp-credentials.json /app/keys/gcp-credentials.json
 RUN pip install --no-cache-dir -e .
 
 # Train the model before running the application
-RUN python pipeline/training_pipeline.py
+#RUN python pipeline/training_pipeline.py
 
 # Expose the port that Flask will run on
 EXPOSE 5000

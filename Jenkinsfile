@@ -31,6 +31,7 @@ pipeline{
                 withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_CREDENTIALS_FILE')]) {
                     script {
                         echo 'Building and pushing Docker image to GCR...'
+                        sh 'cp $GOOGLE_APPLICATION_CREDENTIALS gcp-credentials.json' 
                         sh '''
                         export PATH=$PATH:${GCLOUD_PATH}
 
@@ -41,9 +42,7 @@ pipeline{
                         # Copy credentials file temporarily into Docker context
                         cp ${GOOGLE_CREDENTIALS_FILE} ./gcp-credentials.json
 
-                        docker build \
-                        --build-arg BASE_IMAGE=python:slim \
-                        -t gcr.io/${GCP_PROJECT}/ml-project:hotel_reservation .
+                        docker build -t gcr.io/${GCP_PROJECT}/ml-project:hotel_reservation .
 
                         docker push gcr.io/${GCP_PROJECT}/ml-project:hotel_reservation
 
