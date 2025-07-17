@@ -40,7 +40,7 @@ pipeline{
                         gcloud auth configure-docker --quiet
 
                         # Copy credentials file temporarily into Docker context
-                        cp ${GOOGLE_CREDENTIALS_FILE} ./gcp-credentials.json
+                        cp ${GOOGLE_CREDENTIALS_FILE} .keys/gcp-credentials.json
 
                         docker build -t gcr.io/${GCP_PROJECT}/ml-project:hotel_reservation .
 
